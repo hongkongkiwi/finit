@@ -63,6 +63,7 @@ typedef enum {
 	SVC_SETUP_STATE,	/* Running pre: script */
 	SVC_WAITING_STATE,	/* Condition is in flux, process SIGSTOPed */
 	SVC_READY_STATE,	/* Enabled but condition not satisfied */
+	SVC_STARTING_STATE,	/* Conditions OK and pre: script done, start */
 	SVC_RUNNING_STATE,	/* Process running */
 } svc_state_t;
 
@@ -230,6 +231,7 @@ static inline int svc_is_sysv      (svc_t *svc) { return svc && SVC_TYPE_SYSV   
 static inline int svc_is_tty       (svc_t *svc) { return svc && SVC_TYPE_TTY     == svc->type; }
 static inline int svc_is_runtask   (svc_t *svc) { return svc && (SVC_TYPE_RUNTASK & svc->type);}
 static inline int svc_is_forking   (svc_t *svc) { return svc && svc->forking; }
+static inline int svc_is_manual    (svc_t *svc) { return svc && svc->manual; }
 
 static inline int svc_in_runlevel  (svc_t *svc, int runlevel) { return svc && ISSET(svc->runlevels, runlevel); }
 static inline int svc_nohup        (svc_t *svc) { return svc &&  (0 == svc->sighup || 0 != svc->args_dirty); }
