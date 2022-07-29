@@ -105,7 +105,7 @@ static plugin_t plugin = {
 	.hook[HOOK_BASEFS_UP] = {
 		.cb  = setup
 	},
-  .depends = { "bootmisc", "mdevd" },
+  .depends = { "bootmisc", "mdevd", "modprobe" },
 };
 
 PLUGIN_INIT(plugin_init)
